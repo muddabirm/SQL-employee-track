@@ -51,21 +51,24 @@ inquirer
         }
       )}
     else if(answers.selectone === 'add a department'){
-      prompt([{
+      inquirer.prompt([{
         type: 'input',
         name: 'department',
         message: 'enter name of department...'
       }])
-      db.query(
-        'INSERT INTO department (name)',
-        function(err,result){
-          if(err){
-            console.log(err)
+      .then((departAnswer) => {
+        db.query(
+          'INSERT INTO department (name) VALUES (?)',
+          departAnswer.department,
+          function(err,result){
+            if(err){
+              console.log(err)
+            }
+            console.log(result)
           }
-          console.log(result)
-        }
-      )
-      }
+        )
+      })
+    }
     else if(answers.selectone === 'add a role'){
 
       }
@@ -76,10 +79,4 @@ inquirer
 
       }
   })
-  //.catch((error) => {
-   // if (error.isTtyError) {
-      
-   // } else {
-      
-    //}
-  //})
+  
