@@ -1,5 +1,5 @@
 import mysql from 'mysql2'
-
+//initialize connection to database
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -15,7 +15,7 @@ inquirer
   .prompt([{
     type: 'list',
     name: 'selectone',
-    choices: ['view all departments','view all roles','view all employees','add a department','add a role','add an employee','update an employee',]
+    choices: ['view all departments','view all roles','view all employees','add a department','add a role','add an employee'] //prompting the user with many questions
   }
   ])
   .then((answers) => {
@@ -69,14 +69,51 @@ inquirer
         )
       })
     }
+    //array of questions to ask user
     else if(answers.selectone === 'add a role'){
-
+      inquirer.prompt([
+      {
+        type: 'input',
+        name: 'role',
+        message: 'enter name of role...',
+      },
+      {
+        type: 'input',
+        name: 'salary',
+        message: 'enter salary...',
+      },
+    ])
+      .then((roleAnswer) => {
+        db.query(
+          'INSERT INTO role (title, salary) VALUES (?,?)',
+          [roleAnswer.role, roleAnswer.salary], // had to make the answer an array was getting error otherwise for multiple questions
+          function(err,result){
+            if(err){
+              console.log(err)
+            }
+            console.log(result)
+          }
+        )
+      })
       }
     else if(answers.selectone === 'add an employee'){
-
-      }
-    else if(answers.selectone === 'update an employee'){
-
+      inquirer.prompt([{
+        type: 'input',
+        name: 'employee',
+        message: 'enter name of employee...'
+      }])
+      .then((employeeAnswer) => {
+        db.query(
+          'INSERT INTO employee (first_name) VALUES (?)',
+          employeeAnswer.employee, 
+          function(err,result){
+            if(err){
+              console.log(err)
+            }
+            console.log(result)
+          }
+        )
+      })
       }
   })
   
