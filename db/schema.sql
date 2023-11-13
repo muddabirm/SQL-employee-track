@@ -1,5 +1,6 @@
 DROP DATABASE IF EXISTS manager_db;
 CREATE DATABASE manager_db;
+USE manager_db;
 
 CREATE TABLE department(
     id INT,
@@ -10,7 +11,6 @@ CREATE TABLE role(
     title VARCHAR(30),
     salary DECIMAL,
     department_id INT
-
 );
 CREATE TABLE employee(
     id INT,
