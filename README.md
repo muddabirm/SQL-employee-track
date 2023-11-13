@@ -5,3 +5,5 @@
 
 ![image](https://github.com/muddabirm/SQL-employee-track/assets/33209109/fcc60def-3ec2-4c19-901c-a92d2f598b4d)
 
+# walkthrough video:
+https://drive.google.com/file/d/1aXVbGzvHJNiN2__l7Q1Vwh4wtVNyZQhf/view
